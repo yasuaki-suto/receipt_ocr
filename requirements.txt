@@ -3,6 +3,5 @@ gcapi==0.12.0
 line_bot_sdk==3.9.0
 matplotlib==3.6.3
 opencv_python==4.9.0.80
-Pillow==9.4.0
 Pillow==10.2.0
 protobuf==4.25.3
