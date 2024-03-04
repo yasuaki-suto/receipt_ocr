@@ -209,7 +209,7 @@ def handle_image(event):
     client = vision.ImageAnnotatorClient(credentials=credentials)
 
 
-    image = vision.Image(content=content)
+    image = vision.Image(content=content.iter_content())
     response = client.text_detection(image=image)
 
     bounds = get_document_bounds(response, FeatureType.BLOCK)
