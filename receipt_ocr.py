@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 
 from google.cloud import vision
+import os
 import io
 
 from enum import Enum
