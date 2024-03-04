@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "helical-mile-415213",
+  "private_key_id": "a2c79f1e043dc87c08c494e3f2cf1742702bed86",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDR+MYmtyfA9teH\nf70ccvPnc3Ql+FA/RpsEwXp2EClp1vacrMbZ/nvxmjDoeBvDArubzA71IoJTnuf0\n2RY1Z8vL6gzMJRT0tWqAmlYkx1IjImnICcL/B/GMoleO8RUv9IH7Tt8MuVdfka+a\neifj5ow0bLwwPE0q3YCcY301cmqoMgjQZICbEpx9Sswl5W6zcqz24Mz1inmEWnpz\n4cTpBA1JOfffwVBO4TPS7+0frAKvvTZ0+HDcyfKwjjGrD0jKM8CDZGwB47oZuK3H\n+4lYJMVeEctps9xMOV1/+3CPbuIqv1HApDHz6rozZD9QQFVm4kAz/q/vS/p53WVw\nQaGOmwN5AgMBAAECggEAEVMtCmG/ankTlI8SLAhCHr1UfpOMD4SEYvKR567ys9R0\nWb4Z1D/euzMlSPEsHT2a/EJsk4Zq6XppmjbVUcfENYmUz71Zis1zQbQ6WmOF3/dF\ncid4CvH9WMTGY7l5rZDHrtQ1rEeYsX6EVkMxCmlp9SNprbM0DM7k/0JoQOI1cbY0\n4t64lRBSli2NoBom4H4wBrwtjNtR/EwfcrZ+8Nt2n3EzsBqtZ2sCjg56KISSu2Sz\nWp5wJadqtu0u15PhFaesSGkc6X2jyxyC0427AIsCBA6QwJv48Rr3FyCCVh1uPDuM\nPELlUNKghi3faLDomVJhI1Vi2riz9Qcc2AbmhiWZTwKBgQDvvpbeC8rjddWvN7tj\n+RYnxXVUHZF6MSxtNLB2ha+xUZ4uQvLsEBXR/dwDYO/0ThtCSbtX/itkSFhdayAV\n6yZJwilYpLhwzCLTyHlQMyazCs/64WfBq7VGV8Yw9fJrGsmRlBwdTFMctxo2n0oc\nkOhMU7TkTT8oB/nOKIHnxecQqwKBgQDgNWYsDM+iL89CxcrWvW+A3W0RcqTa49PC\ndG5Sg4CyFg66F/jPL4HWkt50RFhwAF9VFffrHArJGC8eFyOZJr1FIwUXQ8SQrrE9\n3LvJvJR5JfKArrRTAdrVs+6j3QGk7b4B5KklKqL8AyWTotC2tNaXH6124ufK2/p2\niXKUgA0kawKBgQCZV7ArqiNFRZM9lUoYcbOIELYw7RCltVoTJ4ZO6McthWTFdjDm\naItsWxEkYBZajrLEvWBEsd+TLurGJcTKADPnLXdAqWsHSqpkB3AAqhbwodPRRecV\navxxV6b+nfFGLEYNBUzOOIlYbo0nrs66Yr0SROAIvpfMxP00rZgZZO2cLQKBgQDJ\nWwukWekLJlbEB/BvxHdkSvfN6KDnOB6Qj5IYpqMozKhzNl4sa+T2OLZxwoOOKrdz\nKaSaUHfbO83s/yjoPSNT+Ox0hVb9/PWOsjMwLR1GY+8S5FNsDMlkjRCvtybn4N94\nwcuqZk0zePwBSAKbY3MpC7j0gTlcNQ0N8cimVw32ewKBgQCThMH7XclgT5th1vea\npziA5dYi86CaP7kBDrte1F5Z6vp9JSXgxiy1jQmYkVIYSsXSNV2ONaO+vBt7YIVh\nHd4uo6JQYqBzbwMF20Kiu2Ps+glWAUwPGEFNTmsbBiAah8LE4y4nZ71ZGcW3LLG5\nygGnD/kW5fQiK/IvQuAc/d7ESg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "service-account-326@helical-mile-415213.iam.gserviceaccount.com",
+  "client_id": "106026149261550136778",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service-account-326%40helical-mile-415213.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
