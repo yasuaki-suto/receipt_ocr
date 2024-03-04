@@ -257,7 +257,7 @@ def handle_image(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="申し訳ありません。何らかのエラーが発生しました。\n %s" % traceback.format_exc()))
     '''
     content = line_bot_api.get_message_content(event.message.id)
-    with open('.', 'w') as f:
+    with open('./receive.jpg', 'w') as f:
         for c in content.iter_content():
             f.write(c)    
     #message_id = event.message.id
