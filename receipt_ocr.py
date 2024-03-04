@@ -139,9 +139,9 @@ def send_image_to_line(image_file_path):
 app = Flask(__name__)
 #環境変数取得
 #LINE Developers->チャネル名->MessagingAPI設定
-LINE_CHANNEL_ACCESS_TOKEN="Scgg+amANTXVRlQrb4BSKCpXyYK8h84LFeK2ZeY/pxeaIUL6FpTQGvRiKrEAleTaa6Wcjc/6ZmCZpgML8xTxn+p+MJpdAt/in4PouZ0TdSEuuN3dh59bktDqqq8QNzAlyK6rKxEFIYPHirYkY3zyewdB04t89/1O/w1cDnyilFU="
-LINE_CHANNEL_SECRET="209c8e40716c6d57d8ea4fddca2e3e5c"
-line_bot_api = LineBotApi()
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv('ENV_LINE_CHANNEL_ACCESS_TOKEN')
+LINE_CHANNEL_SECRET       = os.getenv('ENV_LINE_CHANNEL_SECRET')
+line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 
