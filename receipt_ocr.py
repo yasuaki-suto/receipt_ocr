@@ -193,6 +193,9 @@ def handle_message(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     content = line_bot_api.get_message_content(event.message.id)
+    with open('file', 'w') as f:
+        for c in content.iter_content():
+            f.write(c)
 #def handle_image():
     '''
     #input_file = "C:\\Users\\sutou\\Downloads\\20240223-000517.jpg"
