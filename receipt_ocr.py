@@ -215,7 +215,7 @@ def handle_image(event):
 
     image = vision.Image(content=content_b)
     response = client.text_detection(image=image)
-
+    '''
     bounds = get_document_bounds(response, FeatureType.BLOCK)
     img_block = draw_boxes(input_file, bounds)
 
@@ -233,6 +233,7 @@ def handle_image(event):
     plt.subplot(142);plt.imshow(img_para[:,:,::-1]);plt.title("img_para")
     plt.subplot(143);plt.imshow(img_word[:,:,::-1]);plt.title("img_word")
     plt.subplot(144);plt.imshow(img_symbol[:,:,::-1]);plt.title("img_symbol")
+    '''
 
 
     lines = get_sorted_lines(response)
@@ -248,6 +249,7 @@ def handle_image(event):
         p2 = (bounds[-1].vertices[1].x, bounds[-1].vertices[1].y) # top right
         p3 = (bounds[-1].vertices[2].x, bounds[-1].vertices[2].y) # bottom right
         p4 = (bounds[0].vertices[3].x, bounds[0].vertices[3].y)   # bottom left
+        '''
         cv2.line(img, p1, p2, (0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
         cv2.line(img, p2, p3, (0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
         cv2.line(img, p3, p4, (0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
@@ -257,6 +259,7 @@ def handle_image(event):
     plt.axis('off')
     plt.imshow(img[:,:,::-1]);plt.title("img_by_line")
     #plt.show()
+        '''
     
     print(all_text)
     try:
