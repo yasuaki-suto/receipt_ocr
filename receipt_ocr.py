@@ -14,9 +14,18 @@ import traceback
 
 from flask import Flask, request, abort
 
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageMessage
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage, FollowEvent,
+    ImageMessage, ImageSendMessage, AudioMessage
+)
 
 class FeatureType(Enum):
     PAGE = 1
@@ -24,6 +33,16 @@ class FeatureType(Enum):
     PARA = 3
     WORD = 4
     SYMBOL = 5
+
+#環境変数取得
+#LINE Developers->チャネル名->MessagingAPI設定
+LINE_CHANNEL_ACCESS_TOKEN = os.getenv('ENV_LINE_CHANNEL_ACCESS_TOKEN')
+LINE_CHANNEL_SECRET       = os.getenv('ENV_LINE_CHANNEL_SECRET')
+line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(LINE_CHANNEL_SECRET)
+
+app = Flask(__name__)
+
 
 def draw_boxes(input_file, bounds):
     img = cv2.imread(input_file, cv2.IMREAD_COLOR)
@@ -136,16 +155,10 @@ def send_image_to_line(image_file_path):
     #LINEに画像とメッセージを送る
     requests.post(api_url, headers=TOKEN_dic, data=send_dic, files=image_dic)
 
+@app.route("/")
+def hello_world():
+    return "hello world!"
     
-app = Flask(__name__)
-#環境変数取得
-#LINE Developers->チャネル名->MessagingAPI設定
-LINE_CHANNEL_ACCESS_TOKEN = os.getenv('ENV_LINE_CHANNEL_ACCESS_TOKEN')
-LINE_CHANNEL_SECRET       = os.getenv('ENV_LINE_CHANNEL_SECRET')
-line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(LINE_CHANNEL_SECRET)
-
-
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -163,6 +176,12 @@ def callback():
 
     return 'OK'
 
+@handler.add(FollowEvent)
+def handle_follow(event):
+   line_bot_api.reply_message(
+       event.reply_token,
+       TextSendMessage(text='友達追加ありがとう'))
+       
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
@@ -173,20 +192,13 @@ def handle_message(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
 #def handle_image():
+    '''
     #input_file = "C:\\Users\\sutou\\Downloads\\20240223-000517.jpg"
     input_file = "C:\\Users\\sutou\\Downloads\\101774.jpg" #手動撮影未加工
     #input_file = "C:\\Users\\sutou\\Downloads\\29399.jpg"
     #input_file = "C:\\Users\\sutou\\Downloads\\DSC_0083~2.JPG" #手動撮影画像切り抜き
 
     img = cv2.imread(input_file)
-    # 画像のサイズを取得
-    #h, w = img.shape[:2]
-    # 画像のサイズを指定：幅を２倍にリサイズ
-    #img = cv2.resize(img, (w * 2, h * 2))
-
-    #im=Image.open(input_file) #test
-    #plt.imshow(im)
-    #plt.show()
 
     client = vision.ImageAnnotatorClient()
 
@@ -243,7 +255,20 @@ def handle_image(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=all_text))
     except Exception as e:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="申し訳ありません。何らかのエラーが発生しました。\n %s" % traceback.format_exc()))
-
+    '''
+    content = line_bot_api.get_message_content(event.message.id)
+    with open('.', 'w') as f:
+        for c in content.iter_content():
+            f.write(c)    
+    #message_id = event.message.id
+    #image_path = getImageLine(message_id)
+    #line_bot_api.reply_message(
+    #    event.reply_token,
+    #    ImageSendMessage(
+    #        original_content_url = Heroku + image_path["main"],
+    #        preview_image_url = Heroku + image_path["preview"]
+    #    )
+    #)
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
