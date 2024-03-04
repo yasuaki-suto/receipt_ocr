@@ -135,6 +135,9 @@ def send_image_to_line(image_file_path):
     #LINEに画像とメッセージを送る
     requests.post(api_url, headers=TOKEN_dic, data=send_dic, files=image_dic)
 
+    
+app = Flask(__name__)
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -232,8 +235,7 @@ def handle_image(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=all_text))
     except Exception as e:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="申し訳ありません。何らかのエラーが発生しました。\n %s" % traceback.format_exc()))
-    
-app = Flask(__name__)
+
 
 #環境変数取得
 #LINE Developers->チャネル名->MessagingAPI設定
