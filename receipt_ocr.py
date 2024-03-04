@@ -137,6 +137,13 @@ def send_image_to_line(image_file_path):
 
     
 app = Flask(__name__)
+#環境変数取得
+#LINE Developers->チャネル名->MessagingAPI設定
+LINE_CHANNEL_ACCESS_TOKEN="Scgg+amANTXVRlQrb4BSKCpXyYK8h84LFeK2ZeY/pxeaIUL6FpTQGvRiKrEAleTaa6Wcjc/6ZmCZpgML8xTxn+p+MJpdAt/in4PouZ0TdSEuuN3dh59bktDqqq8QNzAlyK6rKxEFIYPHirYkY3zyewdB04t89/1O/w1cDnyilFU="
+LINE_CHANNEL_SECRET="209c8e40716c6d57d8ea4fddca2e3e5c"
+line_bot_api = LineBotApi()
+handler = WebhookHandler(LINE_CHANNEL_SECRET)
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -235,14 +242,6 @@ def handle_image(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=all_text))
     except Exception as e:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="申し訳ありません。何らかのエラーが発生しました。\n %s" % traceback.format_exc()))
-
-
-#環境変数取得
-#LINE Developers->チャネル名->MessagingAPI設定
-LINE_CHANNEL_ACCESS_TOKEN="Scgg+amANTXVRlQrb4BSKCpXyYK8h84LFeK2ZeY/pxeaIUL6FpTQGvRiKrEAleTaa6Wcjc/6ZmCZpgML8xTxn+p+MJpdAt/in4PouZ0TdSEuuN3dh59bktDqqq8QNzAlyK6rKxEFIYPHirYkY3zyewdB04t89/1O/w1cDnyilFU="
-LINE_CHANNEL_SECRET="209c8e40716c6d57d8ea4fddca2e3e5c"
-line_bot_api = LineBotApi()
-handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 10000))
