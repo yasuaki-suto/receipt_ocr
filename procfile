@@ -1,0 +1,1 @@
+web: gunicorn receipt_ocr:app --log-file=-
