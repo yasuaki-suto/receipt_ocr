@@ -26,6 +26,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, FollowEvent,
     ImageMessage, ImageSendMessage, AudioMessage
 )
+from google.oauth2 import service_account
 
 class FeatureType(Enum):
     PAGE = 1
