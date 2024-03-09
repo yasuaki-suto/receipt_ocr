@@ -193,11 +193,10 @@ def handle_message(event):
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     content = line_bot_api.get_message_content(event.message.id)
-    content_b = b""
-    for c in content.iter_content():
-        content_b = content_b + c
+    #content_b = b""
+    #for c in content.iter_content():
+    #    content_b = content_b + c
         
-#def handle_image():
     '''
     #input_file = "C:\\Users\\sutou\\Downloads\\20240223-000517.jpg"
     input_file = "C:\\Users\\sutou\\Downloads\\101774.jpg" #手動撮影未加工
@@ -213,7 +212,8 @@ def handle_image(event):
     client = vision.ImageAnnotatorClient(credentials=credentials)
 
 
-    image = vision.Image(content=content_b)
+    #image = vision.Image(content=content_b)
+    image = vision.Image(content=content.iter_content())
     response = client.text_detection(image=image)
     '''
     bounds = get_document_bounds(response, FeatureType.BLOCK)
