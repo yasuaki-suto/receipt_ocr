@@ -44,7 +44,16 @@ handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 app = Flask(__name__)
 
-
+# 画像の保存
+SRC_IMG_PATH = "static/images/{}.jpg"
+def save_img(message_id, src_img_path):
+    # message_idから画像のバイナリデータを取得
+    message_content = line_bot_api.get_message_content(message_id)
+    with open(src_img_path, "wb") as f:
+        # バイナリを1024バイトずつ書き込む
+        for chunk in message_content.iter_content():
+            f.write(chunk)
+            
 def draw_boxes(input_file, bounds):
     img = cv2.imread(input_file, cv2.IMREAD_COLOR)
     for bound in bounds:
@@ -192,10 +201,16 @@ def handle_message(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    content = line_bot_api.get_message_content(event.message.id).iter_content()
-    #content_b = b""
-    #for c in content.iter_content():
-    #    content_b = content_b + c
+
+    message_id = event.message.id
+    src_img_path = SRC_IMG_PATH.format(message_id)   # 保存する画像のパス
+    save_img(message_id, src_img_path)   # 画像を一時保存する
+    img = cv2.imread(src_img_path)
+    
+    content = line_bot_api.get_message_content(event.message.id)
+    content_b = b""
+    for c in content.iter_content():
+        content_b = content_b + c
         
     '''
     #input_file = "C:\\Users\\sutou\\Downloads\\20240223-000517.jpg"
@@ -204,18 +219,16 @@ def handle_image(event):
     #input_file = "C:\\Users\\sutou\\Downloads\\DSC_0083~2.JPG" #手動撮影画像切り抜き
 
     img = cv2.imread(input_file)
+    '''
 
     with io.open(input_file, 'rb') as image_file:
         content = image_file.read()
-    '''
     credentials = service_account.Credentials.from_service_account_file('helical-mile-415213-a2c79f1e043d.json')
     client = vision.ImageAnnotatorClient(credentials=credentials)
 
-
-    #image = vision.Image(content=content_b)
-    image = vision.Image(content=content)
+    image = vision.Image(content=content_b)
     response = client.text_detection(image=image)
-    '''
+
     bounds = get_document_bounds(response, FeatureType.BLOCK)
     img_block = draw_boxes(input_file, bounds)
 
@@ -233,8 +246,6 @@ def handle_image(event):
     plt.subplot(142);plt.imshow(img_para[:,:,::-1]);plt.title("img_para")
     plt.subplot(143);plt.imshow(img_word[:,:,::-1]);plt.title("img_word")
     plt.subplot(144);plt.imshow(img_symbol[:,:,::-1]);plt.title("img_symbol")
-    '''
-
 
     lines = get_sorted_lines(response)
     all_text=''
@@ -249,7 +260,6 @@ def handle_image(event):
         p2 = (bounds[-1].vertices[1].x, bounds[-1].vertices[1].y) # top right
         p3 = (bounds[-1].vertices[2].x, bounds[-1].vertices[2].y) # bottom right
         p4 = (bounds[0].vertices[3].x, bounds[0].vertices[3].y)   # bottom left
-        '''
         cv2.line(img, p1, p2, (0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
         cv2.line(img, p2, p3, (0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
         cv2.line(img, p3, p4, (0, 255, 0), thickness=1, lineType=cv2.LINE_AA)
@@ -258,8 +268,7 @@ def handle_image(event):
     plt.figure(figsize=[10,10])
     plt.axis('off')
     plt.imshow(img[:,:,::-1]);plt.title("img_by_line")
-    #plt.show()
-        '''
+    plt.show()
     
     print(all_text)
     try:
