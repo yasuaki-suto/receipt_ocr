@@ -207,7 +207,7 @@ def handle_image(event):
     message_id = event.message.id
     src_img_path = SRC_IMG_PATH.format(message_id)   # 保存する画像のパス
     save_img(message_id, src_img_path)   # 画像を一時保存する
-    img = cv2.imread(src_img_path)
+    input_file = src_img_path
     
     content = line_bot_api.get_message_content(event.message.id)
     content_b = b""
@@ -220,8 +220,8 @@ def handle_image(event):
     #input_file = "C:\\Users\\sutou\\Downloads\\29399.jpg"
     #input_file = "C:\\Users\\sutou\\Downloads\\DSC_0083~2.JPG" #手動撮影画像切り抜き
 
-    img = cv2.imread(input_file)
     '''
+    img = cv2.imread(input_file)
 
     #with io.open(input_file, 'rb') as image_file:
     #    content = image_file.read()
