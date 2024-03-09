@@ -223,8 +223,8 @@ def handle_image(event):
     img = cv2.imread(input_file)
     '''
 
-    with io.open(input_file, 'rb') as image_file:
-        content = image_file.read()
+    #with io.open(input_file, 'rb') as image_file:
+    #    content = image_file.read()
     credentials = service_account.Credentials.from_service_account_file('helical-mile-415213-a2c79f1e043d.json')
     client = vision.ImageAnnotatorClient(credentials=credentials)
 
@@ -270,7 +270,12 @@ def handle_image(event):
     plt.figure(figsize=[10,10])
     plt.axis('off')
     plt.imshow(img[:,:,::-1]);plt.title("img_by_line")
-    plt.show()
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    #plt.show()
+    #グラフ表示しない
+    plt.close()
+    tmpfile = buf.getvalue()
     
     print(all_text)
     try:
