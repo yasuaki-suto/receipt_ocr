@@ -192,7 +192,7 @@ def handle_message(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
-    content = line_bot_api.get_message_content(event.message.id)
+    content = line_bot_api.get_message_content(event.message.id).iter_content()
     #content_b = b""
     #for c in content.iter_content():
     #    content_b = content_b + c
@@ -213,7 +213,7 @@ def handle_image(event):
 
 
     #image = vision.Image(content=content_b)
-    image = vision.Image(content=content.iter_content())
+    image = vision.Image(content=content)
     response = client.text_detection(image=image)
     '''
     bounds = get_document_bounds(response, FeatureType.BLOCK)
