@@ -3,6 +3,8 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib
 
+from pathlib import Path
+
 from google.cloud import vision
 import os
 import io
@@ -275,6 +277,10 @@ def handle_image(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=all_text))
     except Exception as e:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="申し訳ありません。何らかのエラーが発生しました。\n %s" % traceback.format_exc()))
+        
+    # 一時保存していた画像を削除
+    Path(SRC_IMG_PATH.format(message_id)).absolute().unlink()
+
     '''
     content = line_bot_api.get_message_content(event.message.id)
     with open('./receive.jpg', 'w') as f:
