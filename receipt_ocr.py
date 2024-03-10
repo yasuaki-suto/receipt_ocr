@@ -294,13 +294,13 @@ def handle_image(event):
     '''
     #message_id = event.message.id
     #image_path = getImageLine(message_id)
-    #line_bot_api.reply_message(
-    #    event.reply_token,
-    #    ImageSendMessage(
-    #        original_content_url = Heroku + image_path["main"],
-    #        preview_image_url = Heroku + image_path["preview"]
-    #    )
-    #)
+    line_bot_api.reply_message(
+        event.reply_token,
+        ImageSendMessage(
+            original_content_url = tmpfile,
+            preview_image_url = tmpfile
+        )
+    )
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
