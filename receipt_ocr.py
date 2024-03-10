@@ -2,6 +2,7 @@ import cv2
 from PIL import Image
 import matplotlib.pyplot as plt
 import matplotlib
+import base64
 
 from pathlib import Path
 
@@ -275,7 +276,8 @@ def handle_image(event):
     #plt.show()
     #グラフ表示しない
     plt.close()
-    tmpfile = buf.getvalue()
+    #tmpfile = buf.getvalue()
+    png = base64.encodebytes(buf.getvalue()).decode("utf-8")
     
     print(all_text)
     print(tmpfile)
@@ -299,8 +301,8 @@ def handle_image(event):
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url = buf,
-            preview_image_url = buf
+            original_content_url = png,
+            preview_image_url = png
         )
     )
 if __name__ == "__main__":
