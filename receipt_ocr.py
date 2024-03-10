@@ -278,6 +278,8 @@ def handle_image(event):
     tmpfile = buf.getvalue()
     
     print(all_text)
+    print(tmpfile)
+    print(buf)
     try:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=all_text))
     except Exception as e:
@@ -297,8 +299,8 @@ def handle_image(event):
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url = tmpfile,
-            preview_image_url = tmpfile
+            original_content_url = buf,
+            preview_image_url = buf
         )
     )
 if __name__ == "__main__":
