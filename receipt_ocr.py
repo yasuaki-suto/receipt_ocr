@@ -280,8 +280,7 @@ def handle_image(event):
     png = base64.encodebytes(buf.getvalue()).decode("utf-8")
     
     print(all_text)
-    print(tmpfile)
-    print(buf)
+    print(png)
     try:
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=all_text))
     except Exception as e:
