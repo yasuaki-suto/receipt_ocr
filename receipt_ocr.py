@@ -42,6 +42,7 @@ class FeatureType(Enum):
 #LINE Developers->チャネル名->MessagingAPI設定
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('ENV_LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET       = os.getenv('ENV_LINE_CHANNEL_SECRET')
+RENDER_URL = "https://receipt-ocr-ph1j.onrender.com"
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
@@ -271,13 +272,14 @@ def handle_image(event):
     plt.figure(figsize=[10,10])
     plt.axis('off')
     plt.imshow(img[:,:,::-1]);plt.title("img_by_line")
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
+    #buf = io.BytesIO()
+    #plt.savefig(buf, format='png')
     #plt.show()
     #グラフ表示しない
-    plt.close()
+    #plt.close()
     #tmpfile = buf.getvalue()
-    png = base64.encodebytes(buf.getvalue()).decode("utf-8")
+    #png = base64.encodebytes(buf.getvalue()).decode("utf-8")
+    plt.savefig("img.png", format='png')
     
     print(all_text)
     #print(png)
@@ -300,8 +302,8 @@ def handle_image(event):
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url = png,
-            preview_image_url = png
+            original_content_url = RENDER_URL + "img.png",
+            preview_image_url = RENDER_URL + "img.png"
         )
     )
 if __name__ == "__main__":
