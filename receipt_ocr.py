@@ -279,7 +279,7 @@ def handle_image(event):
     #plt.close()
     #tmpfile = buf.getvalue()
     #png = base64.encodebytes(buf.getvalue()).decode("utf-8")
-    plt.savefig("img.png", format='png')
+    plt.savefig("static/images/img.png", format='png')
     
     print(all_text)
     #print(png)
@@ -302,10 +302,11 @@ def handle_image(event):
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
-            original_content_url = RENDER_URL + "img.png",
-            preview_image_url = RENDER_URL + "img.png"
+            original_content_url = RENDER_URL + "static/images/img.png",
+            preview_image_url = RENDER_URL + "static/images/img.png"
         )
     )
+    
     # 一時保存していた画像を削除
     Path(SRC_IMG_PATH.format(message_id)).absolute().unlink()
     
