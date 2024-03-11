@@ -103,7 +103,6 @@ def get_sorted_lines(response):
               text = symbol.text
               bounds.append([x, y, text, symbol.bounding_box])
     bounds.sort(key=lambda x: x[1])
-    old_x = -1
     old_y = -1
     line = []
     lines = []
@@ -120,15 +119,12 @@ def get_sorted_lines(response):
       if char_height == -1:
           char_width = bound[3].vertices[1].x - bound[3].vertices[0].x
           char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
-          old_x = x
-      threshold = int(char_height * 0.3) + int((x - old_x)/char_width * 0.3)
+      threshold = int(char_height * 0.3)
       #print("threshold=%d" % threshold)
       
       if old_y == -1:
-        old_x = x
         old_y = y
       elif old_y - threshold <= y <= old_y + threshold:
-        old_x = x
         old_y = y
       else:
         old_y = -1
