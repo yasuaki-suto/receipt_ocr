@@ -290,9 +290,6 @@ def handle_image(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="申し訳ありません。何らかのエラーが発生しました。\n %s" % traceback.format_exc()))
     '''
         
-    # 一時保存していた画像を削除
-    Path(SRC_IMG_PATH.format(message_id)).absolute().unlink()
-
     '''
     content = line_bot_api.get_message_content(event.message.id)
     with open('./receive.jpg', 'w') as f:
@@ -301,6 +298,7 @@ def handle_image(event):
     '''
     #message_id = event.message.id
     #image_path = getImageLine(message_id)
+    
     line_bot_api.reply_message(
         event.reply_token,
         ImageSendMessage(
@@ -308,6 +306,9 @@ def handle_image(event):
             preview_image_url = RENDER_URL + "img.png"
         )
     )
+    # 一時保存していた画像を削除
+    Path(SRC_IMG_PATH.format(message_id)).absolute().unlink()
+    
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
