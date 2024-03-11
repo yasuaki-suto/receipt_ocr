@@ -110,8 +110,8 @@ def get_sorted_lines(response):
     char_height = -1
     for bound in bounds:
       #print('bound')
-      print(bound)
-      print("old_y=%d" % old_y)
+      #print(bound)
+      #print("old_y=%d" % old_y)
       x = bound[0]
       #y = bound[1]
       y = bound[3].vertices[0].y + (bound[3].vertices[2].y - bound[3].vertices[0].y) / 2 #文字の中央にする
