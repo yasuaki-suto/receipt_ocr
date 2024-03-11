@@ -106,13 +106,15 @@ def get_sorted_lines(response):
     old_y = -1
     line = []
     lines = []
+    char_height = -1
     for bound in bounds:
       #print('bound')
       #print(bound)
       x = bound[0]
       #y = bound[1]
       y = bound[3].vertices[0].y + (bound[3].vertices[2].y - bound[3].vertices[0].y) / 2 #文字の中央にする
-      char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
+      if char_height == -1:
+          char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
       threshold = int(char_height * 0.3)
       #print("threshold=%d" % threshold)
       
@@ -126,6 +128,7 @@ def get_sorted_lines(response):
         line = add_spaces(line)
         lines.append(line)
         line = []
+        char_height = -1
       line.append(bound)
     line.sort(key=lambda x: x[0])
     lines.append(line)
