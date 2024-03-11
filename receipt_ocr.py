@@ -310,8 +310,8 @@ def handle_image(event):
             original_content_url = RENDER_URL + "static/images/img2.png",
             preview_image_url = RENDER_URL + "static/images/img2.png"
         ),
-        TextSendMessage(text=all_text),
-        
+        TextSendMessage(text=all_text)
+        ]
     )
     
     # 一時保存していた画像を削除
