@@ -121,7 +121,7 @@ def get_sorted_lines(response):
           char_width = bound[3].vertices[1].x - bound[3].vertices[0].x
           char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
           old_x = x
-      threshold = int(char_height * 0.3) + int((x - old_x)/char_width * 0.1)
+      threshold = int(char_height * 0.3) + int((x - old_x)/char_width * 0.3)
       #print("threshold=%d" % threshold)
       
       if old_y == -1:
