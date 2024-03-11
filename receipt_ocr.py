@@ -110,7 +110,8 @@ def get_sorted_lines(response):
       #print('bound')
       #print(bound)
       x = bound[0]
-      y = bound[1]
+      #y = bound[1]
+      y = bound[3].vertices[0].y + (bound[3].vertices[2].y - bound[3].vertices[0].y) / 2 #文字の中央にする
       char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
       threshold = int(char_height * 0.3)
       #print("threshold=%d" % threshold)
@@ -145,7 +146,7 @@ def add_spaces(line):
         char_width = bound[3].vertices[1].x - bound[3].vertices[0].x
         
         # bound[0]:x座標 bound[1]:y座標 bound[2]:文字 bound[3]:vertices(=左上、右上、左下、右下のxy座標を持つ辞書)
-        space_count = int((bound[3].vertices[0].x - last_right_top_x) / (char_width*2.5))
+        space_count = int((bound[3].vertices[0].x - last_right_top_x) / (char_width*1.5))
         #print('space_count=%d' % space_count)
         
         # 行末右上座標更新
