@@ -250,6 +250,7 @@ def handle_image(event):
     plt.subplot(142);plt.imshow(img_para[:,:,::-1]);plt.title("img_para")
     plt.subplot(143);plt.imshow(img_word[:,:,::-1]);plt.title("img_word")
     plt.subplot(144);plt.imshow(img_symbol[:,:,::-1]);plt.title("img_symbol")
+    plt.savefig("static/images/img1.png", format='png')
 
     lines = get_sorted_lines(response)
     all_text=''
@@ -279,7 +280,7 @@ def handle_image(event):
     #plt.close()
     #tmpfile = buf.getvalue()
     #png = base64.encodebytes(buf.getvalue()).decode("utf-8")
-    plt.savefig("static/images/img.png", format='png')
+    plt.savefig("static/images/img2.png", format='png')
     
     print(all_text)
     #print(png)
@@ -300,11 +301,17 @@ def handle_image(event):
     #image_path = getImageLine(message_id)
     
     line_bot_api.reply_message(
-        event.reply_token,
+        event.reply_token,[
         ImageSendMessage(
-            original_content_url = RENDER_URL + "static/images/img.png",
-            preview_image_url = RENDER_URL + "static/images/img.png"
-        )
+            original_content_url = RENDER_URL + "static/images/img1.png",
+            preview_image_url = RENDER_URL + "static/images/img1.png"
+        ),
+        ImageSendMessage(
+            original_content_url = RENDER_URL + "static/images/img2.png",
+            preview_image_url = RENDER_URL + "static/images/img2.png"
+        ),
+        TextSendMessage(text=all_text),
+        
     )
     
     # 一時保存していた画像を削除
