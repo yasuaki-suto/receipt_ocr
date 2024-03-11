@@ -42,7 +42,7 @@ class FeatureType(Enum):
 #LINE Developers->チャネル名->MessagingAPI設定
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('ENV_LINE_CHANNEL_ACCESS_TOKEN')
 LINE_CHANNEL_SECRET       = os.getenv('ENV_LINE_CHANNEL_SECRET')
-RENDER_URL = "https://receipt-ocr-ph1j.onrender.com"
+RENDER_URL = "https://receipt-ocr-ph1j.onrender.com/"
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
@@ -113,7 +113,7 @@ def get_sorted_lines(response):
       y = bound[1]
       char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
       threshold = int(char_height * 0.3)
-      print("threshold=%d" % threshold)
+      #print("threshold=%d" % threshold)
       
       if old_y == -1:
         old_y = y
