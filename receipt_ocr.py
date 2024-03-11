@@ -115,7 +115,7 @@ def get_sorted_lines(response):
       y = bound[3].vertices[0].y + (bound[3].vertices[2].y - bound[3].vertices[0].y) / 2 #文字の中央にする
       if char_height == -1:
           char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
-      threshold = int(char_height * 0.5)
+      threshold = int(char_height * 0.2)
       #print("threshold=%d" % threshold)
       
       if old_y == -1:
