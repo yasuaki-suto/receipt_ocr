@@ -106,6 +106,7 @@ def get_sorted_lines(response):
     old_y = -1
     line = []
     lines = []
+    char_width = -1
     char_height = -1
     for bound in bounds:
       #print('bound')
@@ -115,13 +116,16 @@ def get_sorted_lines(response):
       #y = bound[1]
       y = bound[3].vertices[0].y + (bound[3].vertices[2].y - bound[3].vertices[0].y) / 2 #文字の中央にする
       if char_height == -1:
+          char_width = bound[3].vertices[1].x - bound[3].vertices[0].x
           char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
       threshold = int(char_height * 0.3)
       #print("threshold=%d" % threshold)
       
       if old_y == -1:
+        old_x = x
         old_y = y
-      elif old_y-threshold <= y <= old_y+threshold:
+      elif old_y- (threshold * ((x - old_x) / char_width)) <= y <= old_y+(threshold * ((x - old_x) / char_width)): # thresholdはスペースを考慮して大きくする
+        old_x = x
         old_y = y
       else:
         old_y = -1
