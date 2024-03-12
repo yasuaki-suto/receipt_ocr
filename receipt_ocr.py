@@ -98,14 +98,15 @@ def get_sorted_lines(response):
         for paragraph in block.paragraphs:
           word_line = -1
           for word in paragraph.words:
-            char_height = word.bounding_box.vertices[2].y - word.bounding_box.vertices[0].y
             if word_line == -1 or not (word.bounding_box.vertices[0].y <= word_line and word_line <= word.bounding_box.vertices[2].y):
+                char_height = word.bounding_box.vertices[2].y - word.bounding_box.vertices[0].y
                 word_line = word.bounding_box.vertices[0].y + char_height / 2
             for symbol in word.symbols:
               x = symbol.bounding_box.vertices[0].x
               y = word_line
               text = symbol.text
               bounds.append([x, y, text, symbol.bounding_box])
+          print("text=%s y=%d" % word.text, word_line)
     bounds.sort(key=lambda x: x[1])
     bounds.sort(key=lambda y: y[1])
     old_y = -1
