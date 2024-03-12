@@ -106,7 +106,7 @@ def get_sorted_lines(response):
               y = word_line
               text = symbol.text
               bounds.append([x, y, text, symbol.bounding_box])
-          print("text=%s y=%d" % word.text, word_line)
+            print("text=%s y=%d" % (words.text, word_line))
     bounds.sort(key=lambda x: x[1])
     bounds.sort(key=lambda y: y[1])
     old_y = -1
