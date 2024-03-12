@@ -103,6 +103,7 @@ def get_sorted_lines(response):
               text = symbol.text
               bounds.append([x, y, text, symbol.bounding_box])
     bounds.sort(key=lambda x: x[1])
+    bounds.sort(key=lambda y: y[1])
     old_y = -1
     line = []
     lines = []
