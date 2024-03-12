@@ -96,10 +96,14 @@ def get_sorted_lines(response):
     for page in document.pages:
       for block in page.blocks:
         for paragraph in block.paragraphs:
+          word_line = -1
           for word in paragraph.words:
+            char_height = word.bounding_box.vertices[2].y - word.bounding_box.vertices[0].y
+            if word_line == -1 or not (word.bounding_box.vertices[0].y <= word_line and word_line <= word.bounding_box.vertices[2].y):
+                word_line = word.bounding_box.vertices[0].y + char_height / 2
             for symbol in word.symbols:
               x = symbol.bounding_box.vertices[0].x
-              y = symbol.bounding_box.vertices[0].y
+              y = word_line
               text = symbol.text
               bounds.append([x, y, text, symbol.bounding_box])
     bounds.sort(key=lambda x: x[1])
