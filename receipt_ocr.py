@@ -104,6 +104,7 @@ def get_sorted_lines(response):
             if base_line == -1 or word.bounding_box.vertices[0].x < old_x not (word.bounding_box.vertices[0].y <= old_top and old_top <= word.bounding_box.vertices[3].y) and not (word.bounding_box.vertices[0].y <= old_bottom and old_bottom <= word.bounding_box.vertices[3].y):
                 char_height = word.bounding_box.vertices[3].y - word.bounding_box.vertices[0].y
                 base_line = word.bounding_box.vertices[0].y
+            old_x      = word.bounding_box.vertices[0].x
             old_bottom = word.bounding_box.vertices[0].y
             old_top    = word.bounding_box.vertices[3].y
             for symbol in word.symbols:
