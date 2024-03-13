@@ -126,24 +126,25 @@ def get_sorted_lines(response):
       #print("old_y=%d" % old_y)
       x = bound[0]
       #y = bound[1]
-      y = bound[3].vertices[0].y + (bound[3].vertices[2].y - bound[3].vertices[0].y) / 2 #文字の中央にする
+      y = bound[1]
+      '''
       if char_height == -1:
           char_width = bound[3].vertices[1].x - bound[3].vertices[0].x
           char_height = bound[3].vertices[2].y - bound[3].vertices[0].y
       threshold = int(char_height * 0.3)
       #print("threshold=%d" % threshold)
-      
       if old_y == -1:
         old_y = y
       elif old_y - threshold <= y <= old_y + threshold:
         old_y = y
       else:
         old_y = -1
-        line.sort(key=lambda x: x[0])
-        line = add_spaces(line)
-        lines.append(line)
-        line = []
-        char_height = -1
+      '''
+      line.sort(key=lambda x: x[0])
+      line = add_spaces(line)
+      lines.append(line)
+      line = []
+      char_height = -1
       line.append(bound)
     line.sort(key=lambda x: x[0])
     lines.append(line)
