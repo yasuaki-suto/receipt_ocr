@@ -96,18 +96,24 @@ def get_sorted_lines(response):
     for page in document.pages:
       for block in page.blocks:
         for paragraph in block.paragraphs:
-          word_line = -1
+          old_bottom = -1
+          old_top = -1
+          base_line = -1
           for word in paragraph.words:
-            if word_line == -1 or not (word.bounding_box.vertices[0].y <= word_line and word_line <= word.bounding_box.vertices[3].y):
+            if base_line == -1 or 
+                not (word.bounding_box.vertices[0].y <= old_top and old_top <= word.bounding_box.vertices[3].y) and
+                not (word.bounding_box.vertices[0].y <= old_bottom and old_bottom <= word.bounding_box.vertices[3].y):
                 char_height = word.bounding_box.vertices[3].y - word.bounding_box.vertices[0].y
-                word_line = word.bounding_box.vertices[0].y + char_height / 2
+                base_line = word.bounding_box.vertices[0].y
+            old_bottom = word.bounding_box.vertices[0].y
+            old_top    = word.bounding_box.vertices[3].y
             for symbol in word.symbols:
               x = symbol.bounding_box.vertices[0].x
-              y = word_line
+              y = base_line
               text = symbol.text
               print("text=%s, x=%d, y=%d word.bounding_box.vertices[0].y=%d word.bounding_box.vertices[3].y=%d" % (text,x,y, word.bounding_box.vertices[0].y, word.bounding_box.vertices[3].y))
               bounds.append([x, y, text, symbol.bounding_box])
-            print("y=%d" % (word_line))
+            print("base_line=%d" % (base_line))
     bounds.sort(key=lambda x: x[1])
     bounds.sort(key=lambda y: y[1])
     old_y = -1
