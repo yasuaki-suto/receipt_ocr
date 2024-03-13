@@ -100,9 +100,7 @@ def get_sorted_lines(response):
           old_top = -1
           base_line = -1
           for word in paragraph.words:
-            if base_line == -1 or 
-                not (word.bounding_box.vertices[0].y <= old_top and old_top <= word.bounding_box.vertices[3].y) and
-                not (word.bounding_box.vertices[0].y <= old_bottom and old_bottom <= word.bounding_box.vertices[3].y):
+            if base_line == -1 or not (word.bounding_box.vertices[0].y <= old_top and old_top <= word.bounding_box.vertices[3].y) and not (word.bounding_box.vertices[0].y <= old_bottom and old_bottom <= word.bounding_box.vertices[3].y):
                 char_height = word.bounding_box.vertices[3].y - word.bounding_box.vertices[0].y
                 base_line = word.bounding_box.vertices[0].y
             old_bottom = word.bounding_box.vertices[0].y
