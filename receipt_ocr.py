@@ -105,7 +105,7 @@ def get_sorted_lines(response):
               x = symbol.bounding_box.vertices[0].x
               y = word_line
               text = symbol.text
-              print("text=%s, x=%d, y=%d" % (text,x,y))
+              print("text=%s, x=%d, y=%d word.bounding_box.vertices[0].y=%d word.bounding_box.vertices[3].y=%d" % (text,x,y, word.bounding_box.vertices[0].y, word.bounding_box.vertices[3].y))
               bounds.append([x, y, text, symbol.bounding_box])
             print("y=%d" % (word_line))
     bounds.sort(key=lambda x: x[1])
