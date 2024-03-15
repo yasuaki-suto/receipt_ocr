@@ -247,7 +247,7 @@ def handle_image(event):
 
     #with io.open(input_file, 'rb') as image_file:
     #    content = image_file.read()
-    credentials = service_account.Credentials.from_service_account_file('helical-mile-415213-a2c79f1e043d.json')
+    credentials = service_account.Credentials.from_service_account_file('helical-mile-415213-e08c46a18701.json')
     client = vision.ImageAnnotatorClient(credentials=credentials)
 
     image = vision.Image(content=content_b)
